@@ -48,11 +48,11 @@ describe('Popconfirm', () => {
 
     const triggerNode = wrapper.container.querySelectorAll('span')[0];
     fireEvent.click(triggerNode);
-    expect(onOpenChange).toHaveBeenLastCalledWith(true, undefined);
+    expect(onOpenChange).toHaveBeenLastCalledWith(true);
     expect(wrapper.container.querySelectorAll('.popconfirm-test').length).toBe(1);
 
     fireEvent.click(triggerNode);
-    expect(onOpenChange).toHaveBeenLastCalledWith(false, undefined);
+    expect(onOpenChange).toHaveBeenLastCalledWith(false);
   });
 
   it('should show overlay when trigger is clicked', async () => {
@@ -158,7 +158,7 @@ describe('Popconfirm', () => {
 
   it('should support onConfirm to return Promise', async () => {
     const confirm = () =>
-      new Promise(res => {
+      new Promise((res) => {
         setTimeout(res, 300);
       });
     const onOpenChange = jest.fn((_, e) => {
@@ -256,7 +256,7 @@ describe('Popconfirm', () => {
           <Popconfirm
             title="will unmount"
             onConfirm={() =>
-              new Promise(resolve => {
+              new Promise((resolve) => {
                 setTimeout(() => {
                   setShow(false);
                   resolve(true);

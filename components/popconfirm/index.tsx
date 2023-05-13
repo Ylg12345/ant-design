@@ -76,12 +76,12 @@ const Popconfirm = React.forwardRef<unknown, PopconfirmProps>((props, ref) => {
     }
   };
 
-  const onOpenChange = (value: boolean) => {
+  const onCommonChange = (value: boolean) => {
     const { disabled = false } = props;
     if (disabled) {
       return;
     }
-    settingOpen(value);
+    setOpen(value, true);
   };
 
   const {
@@ -104,7 +104,14 @@ const Popconfirm = React.forwardRef<unknown, PopconfirmProps>((props, ref) => {
       trigger={trigger}
       prefixCls={prefixCls}
       placement={placement}
-      onOpenChange={onOpenChange}
+      onOpenChange={(value: boolean) => {
+        onCommonChange(value);
+        props.onOpenChange?.(value);
+      }}
+      onVisibleChange={(value: boolean) => {
+        onCommonChange(value);
+        props.onVisibleChange?.(value);
+      }}
       open={open}
       ref={ref}
       overlayClassName={overlayClassNames}
